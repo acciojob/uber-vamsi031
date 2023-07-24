@@ -33,7 +33,11 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public void deleteCustomer(Integer customerId) {
 		// Delete customer without using deleteById function
-		customerRepository2.deleteById(customerId);
+		Optional<Customer> optionalCustomer = customerRepository2.findById(customerId);
+		if(!optionalCustomer.isPresent())
+			return;
+		Customer customer = optionalCustomer.get();
+		customerRepository2.delete(customer);
 
 	}
 

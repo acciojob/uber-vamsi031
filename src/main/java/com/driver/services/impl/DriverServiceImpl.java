@@ -63,6 +63,8 @@ public class DriverServiceImpl implements DriverService {
 		Optional<Driver> optionalDriver = driverRepository3.findById(driverId);
 		if(optionalDriver.isPresent()==false)return;
 		Driver driver = optionalDriver.get();
+		Cab cab = driver.getCab();
+		cabRepository3.delete(cab);
 		driverRepository3.delete(driver);
 	}
 
@@ -72,7 +74,10 @@ public class DriverServiceImpl implements DriverService {
 		Optional<Driver> optionalDriver = driverRepository3.findById(driverId);
 		if(optionalDriver.isPresent()==false)return;
 		Driver driver = optionalDriver.get();
-		driver.getCab().setAvailability(false);
+		Cab cab = driver.getCab();
+		cab.setAvailability(false);
+
+		cabRepository3.save(cab);
 
 	}
 }
