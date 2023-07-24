@@ -1,17 +1,15 @@
 package com.driver.model;
 
-import com.driver.model.TripStatus;
-
 import javax.persistence.*;
 
 @Entity
 public class TripBooking {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int bookingId;
+    private int tripBookingId;
     private String fromLocation;
     private String toLocation;
-    private int distance;
+    private int distanceInKm;
 
     @Enumerated(EnumType.STRING)
     private TripStatus tripStatus;
@@ -29,22 +27,22 @@ public class TripBooking {
     }
 
     public TripBooking(int bookingId, String fromLocation, String toLocation, int distance, TripStatus tripStatus, int bill, Driver driver, Customer customer) {
-        this.bookingId = bookingId;
+        this.tripBookingId = bookingId;
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
-        this.distance = distance;
+        this.distanceInKm = distance;
         this.tripStatus = tripStatus;
         this.bill = bill;
         this.driver = driver;
         this.customer = customer;
     }
 
-    public int getBookingId() {
-        return bookingId;
+    public int getTripBookingId() {
+        return tripBookingId;
     }
 
-    public void setBookingId(int bookingId) {
-        this.bookingId = bookingId;
+    public void setTripBookingId(int tripBookingId) {
+        this.tripBookingId = tripBookingId;
     }
 
     public String getFromLocation() {
@@ -63,12 +61,12 @@ public class TripBooking {
         this.toLocation = toLocation;
     }
 
-    public int getDistance() {
-        return distance;
+    public int getDistanceInKm() {
+        return distanceInKm;
     }
 
-    public void setDistance(int distance) {
-        this.distance = distance;
+    public void setDistanceInKm(int distanceInKm) {
+        this.distanceInKm = distanceInKm;
     }
 
     public TripStatus getTripStatus() {

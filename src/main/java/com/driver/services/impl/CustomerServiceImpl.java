@@ -9,7 +9,6 @@ import com.driver.repository.CustomerRepository;
 import com.driver.repository.DriverRepository;
 import com.driver.repository.TripBookingRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,11 +54,11 @@ public class CustomerServiceImpl implements CustomerService {
 		List<Driver> driverList=driverRepository2.findAll();
 		driverList.sort((a,b)->(a.getDriverId()-b.getDriverId()));
 		for (Driver driver:driverList) {
-			if (driver.getCab().getAvailability()){
-				driver.getCab().setAvailability(false);
+			if (driver.getCab().getAvailable()){
+				driver.getCab().setAvailable(false);
 				tripBooking.setFromLocation(fromLocation);
 				tripBooking.setToLocation(toLocation);
-				tripBooking.setDistance(distanceInKm);
+				tripBooking.setDistanceInKm(distanceInKm);
 				tripBooking.setTripStatus(TripStatus.CONFIRMED);
 				tripBooking.setBill(distanceInKm*driver.getCab().getPerKmRate());
 
@@ -67,7 +66,7 @@ public class CustomerServiceImpl implements CustomerService {
 				tripBooking.setCustomer(customer);
 //				TripBooking savedTripBooking = tripBookingRepository2.save(tripBooking);
 				customer.getTripBookingsList().add(tripBooking);
-				driver.getTripBookins().add(tripBooking);
+				driver.getTripBookingList().add(tripBooking);
 				customerRepository2.save(customer);
 				driverRepository2.save(driver);
 				return tripBooking;
@@ -87,7 +86,7 @@ public class CustomerServiceImpl implements CustomerService {
 		curTrip.setBill(0);
 
 		Driver driver=curTrip.getDriver();
-		driver.getCab().setAvailability(true);
+		driver.getCab().setAvailable(true);
 
 		driverRepository2.save(driver);
 		tripBookingRepository2.save(curTrip);
@@ -102,7 +101,7 @@ public class CustomerServiceImpl implements CustomerService {
 		TripBooking tripBooking=optionalTripBooking.get();
 		tripBooking.setTripStatus(TripStatus.COMPLETED);
 		Driver driver=tripBooking.getDriver();
-		driver.getCab().setAvailability(true);
+		driver.getCab().setAvailable(true);
 
 		driverRepository2.save(driver);
 		tripBookingRepository2.save(tripBooking);

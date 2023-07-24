@@ -16,7 +16,7 @@ public class Driver {
     private Cab cab;
 
     @OneToMany(mappedBy = "driver",cascade = CascadeType.ALL)
-    private List<TripBooking> tripBookins = new ArrayList<>();
+    private List<TripBooking> tripBookingList = new ArrayList<>();
 
     public Driver() {
     }
@@ -26,7 +26,7 @@ public class Driver {
         this.mobile = mobile;
         this.password = password;
         this.cab = cab;
-        this.tripBookins = tripBookins;
+        this.tripBookingList = tripBookins;
     }
 
     public int getDriverId() {
@@ -61,11 +61,11 @@ public class Driver {
         this.cab = cab;
     }
 
-    public List<TripBooking> getTripBookins() {
-        return tripBookins;
+    public List<TripBooking> getTripBookingList() {
+        return tripBookingList;
     }
 
-    public void setTripBookins(List<TripBooking> tripBookins) {
-        this.tripBookins = tripBookins;
+    public void setTripBookingList(List<TripBooking> tripBookingList) {
+        this.tripBookingList = tripBookingList;
     }
 }

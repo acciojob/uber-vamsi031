@@ -27,7 +27,7 @@ public class CustomerController {
 	@PostMapping("/bookTrip")
 	public ResponseEntity<Integer> bookTrip(@RequestParam Integer customerId, @RequestParam String fromLocation, @RequestParam String toLocation, @RequestParam Integer distanceInKm) throws Exception {
 		TripBooking trip = customerService.bookTrip(customerId,fromLocation,toLocation,distanceInKm);
-		return new ResponseEntity<>(trip.getBookingId(), HttpStatus.CREATED);
+		return new ResponseEntity<>(trip.getTripBookingId(), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/complete")
